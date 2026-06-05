@@ -205,6 +205,22 @@ footer a{font-weight:700}
 .src .lim{font-size:12px;color:var(--muted);font-style:italic;margin-top:7px}
 .blind{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
 @media(max-width:620px){.blind{grid-template-columns:1fr}}
+
+/* ===== bets tabs ===== */
+.tabs{display:flex;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.tab{flex:1;min-width:240px;text-align:left;cursor:pointer;padding:20px 22px;border-radius:16px;
+  border:1px solid var(--line);background:var(--panel);transition:.22s;font-family:inherit;color:inherit}
+.tab:hover{border-color:var(--line-2)}
+.tab.active{border-color:var(--line-2);background:linear-gradient(160deg,var(--neon-soft),var(--panel));
+  box-shadow:0 0 0 1px var(--line-2),0 16px 40px -18px rgba(62,232,122,.3)}
+.tab .tt{font-family:'Unbounded';font-size:18px;color:#fff;margin:8px 0 4px}
+.tab .td{font-size:13px;color:var(--muted)}
+.tab .tn{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--neon)}
+.tab.dim .tn{color:var(--muted)}
+.tab.active.dim .tn{color:var(--neon)}
+.panel-bets{display:none}
+.panel-bets.show{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -729,18 +745,20 @@ footer a{font-weight:700}
   <h2 class="sec-title rv">Два способа растить самостоятельный retention</h2>
   <p class="sec-lead rv">Всё сводится к одному: самостоятельный retention растёт только из двух гейтов. Отсюда два блока и три направления. Ставка сквозная — <strong>корень структурный, а не контентный</strong>: ни одно направление не про «добавить мультиков».</p>
 
-  <div class="grid g2 rv" style="margin-bottom:34px">
-    <div class="card glow">
-      <span class="tag neon">Блок А</span>
-      <h3>Снять барьеры · Гейт 1</h3>
-      <p>«Хочет, но не может». Направление 1 (автономный вход, 2a) + Направление 2 (со-куратор, 2b).</p>
-    </div>
-    <div class="card">
-      <span class="tag dark">Блок Б</span>
-      <h3>Поднять вовлечённость · Гейт 2</h3>
-      <p>«Может, но не хочет». Направление 3 (триггер возврата).</p>
-    </div>
+  <div class="tabs rv" role="tablist">
+    <button class="tab active dim" id="tabA" onclick="showBets('A')" role="tab" aria-selected="true">
+      <span class="tn">Блок А · Гейт 1</span>
+      <div class="tt">Снять барьеры</div>
+      <div class="td">«Хочет, но не может» — направления 1 и 2</div>
+    </button>
+    <button class="tab dim" id="tabB" onclick="showBets('B')" role="tab" aria-selected="false">
+      <span class="tn">Блок Б · Гейт 2</span>
+      <div class="tt">Поднять вовлечённость</div>
+      <div class="td">«Может, но не хочет» — направление 3</div>
+    </button>
   </div>
+
+  <div class="panel-bets show" id="panelA">
 
   <!-- N1 -->
   <div class="card rv" style="margin-bottom:20px">
@@ -794,6 +812,8 @@ footer a{font-weight:700}
   </div>
 
   <!-- N3 -->
+  </div><!-- /panelA -->
+  <div class="panel-bets" id="panelB">
   <div class="card glow rv" style="margin-bottom:30px">
     <span class="tag neon">Направление 3 · Блок Б · флагман · 8–9 + 6–7</span>
     <h3 style="font-size:23px;margin-bottom:6px">Триггер возврата, инициируемый не родителем</h3>
@@ -822,6 +842,8 @@ footer a{font-weight:700}
       </div>
     </div>
   </div>
+
+  </div><!-- /panelB -->
 
   <!-- PRIORITY -->
   <h3 style="font-size:24px;margin-bottom:18px" class="rv">Приоритет: 1 → 2 → 3</h3>
@@ -876,6 +898,16 @@ footer a{font-weight:700}
 <button class="totop" id="totop" aria-label="Наверх">↑</button>
 
 <script>
+function showBets(b){
+  document.getElementById('panelA').classList.toggle('show',b==='A');
+  document.getElementById('panelB').classList.toggle('show',b==='B');
+  document.getElementById('tabA').classList.toggle('active',b==='A');
+  document.getElementById('tabB').classList.toggle('active',b==='B');
+  document.getElementById('tabA').setAttribute('aria-selected',b==='A');
+  document.getElementById('tabB').setAttribute('aria-selected',b==='B');
+  const panel=document.getElementById(b==='A'?'panelA':'panelB');
+  panel.querySelectorAll('.rv').forEach(el=>el.classList.add('in'));
+}
 const prog=document.getElementById('prog');
 const t=document.getElementById('totop');
 addEventListener('scroll',()=>{
