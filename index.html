@@ -157,6 +157,54 @@ footer a{font-weight:700}
 
 .rv{opacity:0;transform:translateY(26px);transition:.7s cubic-bezier(.2,.7,.2,1)}
 .rv.in{opacity:1;transform:none}
+
+/* ===== SCHEMA: research matrix ===== */
+.matrix{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
+.matrix table{border-collapse:collapse;width:100%;min-width:640px;font-size:13.5px}
+.matrix th,.matrix td{padding:14px 12px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.matrix th{background:rgba(255,255,255,.04);font-family:'Manrope';font-weight:700;font-size:11.5px;
+  letter-spacing:.04em;text-transform:uppercase;color:var(--neon)}
+.matrix td:first-child,.matrix th:first-child{text-align:left;font-weight:700;color:#fff;font-family:'Manrope';white-space:nowrap}
+.matrix tr:last-child td{border-bottom:none}
+.mk{display:inline-block;width:14px;height:14px;border-radius:50%;background:var(--neon);box-shadow:0 0 10px var(--neon)}
+.mk.half{background:transparent;border:2px solid var(--neon);box-shadow:none}
+.mk.no{width:10px;height:2px;border-radius:2px;background:var(--line);box-shadow:none}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:16px;font-size:12.5px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:8px}
+
+/* ===== SCHEMA: gate flow ===== */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+.flow-node{flex:1;min-width:150px;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-align:center;position:relative}
+.flow-node.g1{border-color:var(--line-2);background:linear-gradient(160deg,var(--neon-soft),var(--panel))}
+.flow-node .ic{font-family:'Unbounded';font-size:13px;color:var(--neon);font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:8px}
+.flow-node .q{font-family:'Unbounded';font-size:20px;color:#fff;margin-bottom:6px}
+.flow-node p{font-size:13px;color:#c4d2cb}
+.flow-arrow{display:flex;align-items:center;justify-content:center;padding:0 10px;color:var(--neon);font-size:22px;flex:none}
+@media(max-width:760px){.flow{flex-direction:column}.flow-arrow{transform:rotate(90deg);padding:8px 0}}
+.branch{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+@media(max-width:760px){.branch{grid-template-columns:repeat(2,1fr)}}
+.branch .b{padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);font-size:12.5px}
+.branch .b b{display:block;color:var(--neon);font-family:'Manrope';margin-bottom:5px;font-size:12px;letter-spacing:.03em}
+.branch .b.warn{border-color:rgba(255,138,76,.3)}
+.branch .b.warn b{color:var(--warn)}
+
+/* ===== SCHEMA: triangulation radial ===== */
+.radial{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:760px){.radial{grid-template-columns:1fr}}
+.r-core{grid-column:1 / -1;text-align:center;padding:22px;border:1px solid var(--line-2);border-radius:16px;
+  background:linear-gradient(160deg,var(--neon-soft),var(--panel));margin-bottom:4px}
+.r-core .t{font-family:'Unbounded';font-size:18px;color:#fff}
+.r-core .s{font-size:13px;color:var(--muted);margin-top:6px}
+.src{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--panel);transition:.2s}
+.src:hover{border-color:var(--line-2);transform:translateY(-2px)}
+.src .h{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.src .n{flex:none;width:30px;height:30px;border-radius:9px;background:var(--neon-soft);border:1px solid var(--line-2);
+  color:var(--neon);font-family:'Unbounded';font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center}
+.src .ttl{font-family:'Manrope';font-weight:700;color:#fff;font-size:14.5px}
+.src p{font-size:13px;color:#c4d2cb;margin:0}
+.src .lim{font-size:12px;color:var(--muted);font-style:italic;margin-top:7px}
+.blind{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+@media(max-width:620px){.blind{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -238,12 +286,12 @@ footer a{font-weight:700}
     <div class="card glow">
       <span class="tag neon">Гейт 1 · доступ · зона родителя</span>
       <div class="gate-big">«Хочет, но не может»</div>
-      <p>Желание у ребёнка есть, но доступ закрыт — пульт, время, разрешение, сложный вход. Задача продукта — <strong>снять барьеры</strong>.</p>
+      <p>«Можно?» — у кого пульт, разрешено ли время, активирована ли фича, не под паролем ли вход. Закрыт в двух режимах: <strong>не может дать</strong> (технический барьер) или <strong>не хочет давать</strong> (сознательный лимит). Задача — <strong>снять барьеры</strong>.</p>
     </div>
     <div class="card">
       <span class="tag dark">Гейт 2 · желание · зона ребёнка</span>
       <div class="gate-big">«Может, но не хочет»</div>
-      <p>Доступ открыт, но мотивации вернуться нет. Задача продукта — <strong>поднять вовлечённость</strong>.</p>
+      <p>«Хочу?» — есть ли мотивация вернуться. Доступ открыт, но желания нет. Задача — <strong>поднять вовлечённость</strong>.</p>
     </div>
   </div>
 
@@ -301,30 +349,220 @@ footer a{font-weight:700}
 
 <div class="divider"></div>
 
-<!-- DISCOVERY: 4 QUESTIONS -->
+<!-- 1. КОГО И КАК ИССЛЕДОВАТЬ -->
 <section id="research">
-  <span class="kicker">01 · Discovery · ответы на ТЗ</span>
-  <h2 class="sec-title rv">Четыре вопроса исследования</h2>
-  <p class="sec-lead rv">ТВ ломает мобильную методологию по четырём причинам: единица использования переменная, интент и действие разорваны, нет записи экрана, отказ невидим. Каждая диктует свой метод.</p>
+  <span class="kicker">01 · Discovery · вопрос 1</span>
+  <h2 class="sec-title rv">Кого и как исследовать</h2>
+  <p class="sec-lead rv">Исследуем не «пользователя вообще», а три типа респондентов через сценарии присутствия. Метод подбираем под каждого — карта «кто × каким методом».</p>
+
+  <div class="matrix rv">
+    <table>
+      <thead>
+        <tr>
+          <th>Кого</th>
+          <th>Этнография<br>в гостиной</th>
+          <th>Наблюдение<br>(play-based)</th>
+          <th>Дневник<br>1–2 недели</th>
+          <th>Глубинное<br>интервью</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Ребёнок 6–7<br><span style="color:var(--muted);font-weight:400;font-size:12px">слабое чтение, низкая автономия</span></td>
+          <td><span class="mk"></span></td>
+          <td><span class="mk"></span></td>
+          <td><span class="mk half"></span></td>
+          <td><span class="mk no"></span></td>
+        </tr>
+        <tr>
+          <td>Ребёнок 8–9<br><span style="color:var(--muted);font-weight:400;font-size:12px">читает, чаще сам у пульта</span></td>
+          <td><span class="mk"></span></td>
+          <td><span class="mk"></span></td>
+          <td><span class="mk half"></span></td>
+          <td><span class="mk half"></span></td>
+        </tr>
+        <tr>
+          <td>Родитель<br><span style="color:var(--muted);font-weight:400;font-size:12px">гейткипер доступа, покупатель</span></td>
+          <td><span class="mk"></span></td>
+          <td><span class="mk no"></span></td>
+          <td><span class="mk"></span></td>
+          <td><span class="mk"></span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="legend rv">
+    <span><span class="mk"></span> основной метод</span>
+    <span><span class="mk half"></span> вспомогательный</span>
+    <span><span class="mk no"></span> не применяем</span>
+  </div>
+
+  <div class="grid g2 rv" style="margin-top:26px">
+    <div class="card">
+      <h4>Почему именно так</h4>
+      <ul class="clean">
+        <li><strong>Ребёнка наблюдаем, а не опрашиваем</strong> — 6–9 ненадёжный информант, склонен к социально желаемым ответам. Play-based: «покажи, как включаешь», «найди вчерашнее».</li>
+        <li><strong>Родителя — интервью + дневник</strong> — он носитель модели решения и единственный источник по подавленному спросу 2b.</li>
+        <li><strong>Этнография для всех</strong> — единица использования на ТВ это семья в комнате, а не индивид.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Сценарии присутствия (что ловим в поле)</h4>
+      <ul class="clean">
+        <li><strong>Ребёнок один, сам включил</strong> → чистый замер желания.</li>
+        <li><strong>Просит — родитель исполняет / отказывает</strong> → 2a / 2b.</li>
+        <li><strong>Совместный просмотр</strong> → семейный паттерн ценности.</li>
+        <li><strong>Родитель отправляет, пока занят</strong> → CTA родителя.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 2. ОСОБЕННОСТЬ ТВ-ДИСКАВЕРИ -->
+<section>
+  <span class="kicker">01 · Discovery · вопрос 2</span>
+  <h2 class="sec-title rv">Особенность ТВ-дискавери</h2>
+  <p class="sec-lead rv">ТВ ломает привычную мобильную методологию. Каждая особенность среды диктует свой метод — и объясняет, почему «дети не возвращаются сами».</p>
 
   <div class="grid g2 rv">
     <div class="card">
-      <h4>Кого и как исследовать</h4>
-      <p>Два подсегмента ребёнка (6–7 / 8–9) + родитель + сценарии по источнику интента. Метод под ТВ: <strong>in-home этнография</strong> в гостиной (кто у пульта, где стоит ТВ, есть ли «детское окно»), <strong>наблюдение за ребёнком</strong> вместо опроса (он ненадёжный информант, склонен к социально желаемым ответам), <strong>дневники родителей</strong> на 1–2 недели для ловли ритма и триггеров возврата.</p>
+      <span class="tag line">01</span>
+      <h3>Единица использования переменная</h3>
+      <p>На мобильном всегда «один человек = один девайс». На ТВ — то индивид (ребёнок один), то семья. Нельзя изучать «пользователя вообще» → изучаем сценарии по источнику интента.</p>
     </div>
     <div class="card">
-      <h4>Особенность ТВ-дискавери</h4>
-      <p>Единица использования переменная — то индивид (ребёнок один), то семья. <strong>Интент и действие принадлежат разным людям</strong> — хочет ребёнок, нажимает родитель. Подавленный спрос невидим. Нет session recording и, главное, <strong>нет нативного канала реактивации</strong>: выключенный ТВ нечем «позвать», в отличие от пуша на мобильном. Это и есть физический корень исходной проблемы.</p>
+      <span class="tag line">02</span>
+      <h3>Интент и действие разорваны</h3>
+      <p>Хочет ребёнок, нажимает родитель. Возникают сценарии 2a / 2b, которых на мобильном не бывает → отдельно ловим желание и отдельно реализацию доступа.</p>
     </div>
     <div class="card">
-      <h4>Как развести ребёнка и родителя</h4>
-      <p>Не опросом — данные слепы к автору интента. <strong>Изоляцией переменных:</strong> сценарий «ребёнок один» убирает родителя из уравнения → виден чистый Гейт 2; края когорты показывают, где гейт уже (6–7 → Гейт 1, 8–9 → Гейт 2); раскладка сессий по источнику интента показывает, где течёт сильнее. JTBD-конфликт служит проверкой: решение, радующее ребёнка, не должно закрывать Гейт 1 родителя.</p>
+      <span class="tag line">03</span>
+      <h3>Подавленный спрос невидим</h3>
+      <p>Отказ родителя (2b) не оставляет следа — несостоявшаяся сессия не логируется. Системная слепая зона → измеряем только дневником и интервью.</p>
     </div>
-    <div class="card">
-      <h4>Открытые сигналы без доступа к данным</h4>
-      <p>Триангуляция пяти типов: <strong>отзывы и форумы</strong> родителей · <strong>Wordstat и поведение на видеоплатформах</strong> как спрос · <strong>конкуренты</strong> как готовые решения · <strong>Ofcom / Common Sense</strong> как объективка · <strong>release notes Сбера</strong> как следы команды. Закрывают родительскую сторону и контекст сегментов; голос ребёнка и подавленный спрос 2b — добираем своим качественным ресёрчем.</p>
+    <div class="card glow">
+      <span class="tag neon">04 · корень проблемы</span>
+      <h3>Нет канала реактивации</h3>
+      <p>Мобильный пушит — выключенный ТВ молчит. Поэтому единственным триггером возврата и оказывается родитель. Это не дефект продукта, а <strong>физика среды</strong> — и прямой корень исходной задачи.</p>
     </div>
   </div>
+  <p class="note rv" style="margin-top:14px">Плюс нет session recording и heatmap — замещаем прямым наблюдением и дневниками, а среду комнаты (где ТВ, у кого пульт, есть ли «детское окно») фиксируем как часть данных, а не фон.</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 3. КАК РАЗВЕСТИ РЕБЁНКА И РОДИТЕЛЯ -->
+<section>
+  <span class="kicker">01 · Discovery · вопрос 3</span>
+  <h2 class="sec-title rv">Как развести проблему ребёнка и родителя</h2>
+  <p class="sec-lead rv">Возврат проходит через два независимых шлюза. Закрылся один — петля рвётся. Схема показывает, где именно и по чьей вине.</p>
+
+  <!-- gate flow -->
+  <div class="card rv" style="margin-bottom:18px">
+    <div class="flow">
+      <div class="flow-node">
+        <div class="ic">старт</div>
+        <div class="q">Хочу вернуться</div>
+        <p>интент ребёнка</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node g1">
+        <div class="ic">Гейт 1 · родитель</div>
+        <div class="q">«Можно?»</div>
+        <p>доступ: пульт, время, разрешение, вход</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node g1">
+        <div class="ic">Гейт 2 · ребёнок</div>
+        <div class="q">«Хочу?»</div>
+        <p>мотивация вернуться</p>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-node">
+        <div class="ic">итог</div>
+        <div class="q">Возврат</div>
+        <p>только если открыты <strong>оба</strong></p>
+      </div>
+    </div>
+
+    <div class="branch">
+      <div class="b"><b>Сценарий 1</b>Один, сам включил — оба гейта на ребёнке. Чистый замер желания.</div>
+      <div class="b"><b>2a · опосредован</b>Хочет, родитель исполняет. Гейт 2 открыт, Гейт 1 опосредован.</div>
+      <div class="b warn"><b>2b · подавлен</b>Хочет, родитель отказал. Гейт 1 закрыт «по воле». Невидим в данных.</div>
+      <div class="b"><b>4 · CTA</b>Родитель отправляет. Гейт 2 закрыт, родитель открывает за ребёнка.</div>
+    </div>
+  </div>
+
+  <div class="grid g2 rv">
+    <div class="card">
+      <h4>Почему нельзя просто посмотреть в данные</h4>
+      <p>Данные показывают <strong>что</strong> произошло, но не <strong>кто</strong> этого хотел: самостоятельный и родительский возврат слиты в один поток, а отказы не видны вовсе. Разводим <strong>изоляцией переменных</strong>, а не лобовой аналитикой.</p>
+    </div>
+    <div class="card">
+      <h4>Четыре приёма изоляции</h4>
+      <ul class="clean">
+        <li><strong>Сценарий «ребёнок один»</strong> убирает родителя → виден чистый Гейт 2.</li>
+        <li><strong>Края когорты</strong>: 6–7 → узкое место Гейт 1, 8–9 → Гейт 2.</li>
+        <li><strong>Раскладка сессий</strong> по источнику интента → где течёт сильнее.</li>
+        <li><strong>JTBD-конфликт</strong> как проверка: решение для ребёнка не должно закрывать Гейт 1 родителя.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 4. ОТКРЫТЫЕ СИГНАЛЫ -->
+<section>
+  <span class="kicker">01 · Discovery · вопрос 4</span>
+  <h2 class="sec-title rv">Открытые сигналы без доступа к данным</h2>
+  <p class="sec-lead rv">Без продуктовой аналитики строю картину триангуляцией: пять разнотипных источников сходятся в одну гипотезную карту. Каждый тяну прицельно — и честно отмечаю предел доверия.</p>
+
+  <div class="radial rv">
+    <div class="r-core">
+      <div class="t">Картина без данных</div>
+      <div class="s">пересечение пяти источников → направление и гипотезы, не валидация</div>
+    </div>
+    <div class="src">
+      <div class="h"><span class="n">1</span><span class="ttl">Голос родителей</span></div>
+      <p>Отзывы на устройства (DNS, Ozon, WB, RuStore), форумы (Baby.ru, Pikabu), комментарии на VC.ru.</p>
+      <p class="lim">Предел: пишут недовольные и активные; ребёнок не представлен.</p>
+    </div>
+    <div class="src">
+      <div class="h"><span class="n">2</span><span class="ttl">Спрос как поведение</span></div>
+      <p>Яндекс Wordstat, Google Trends; поведение на детских видеоплатформах как прокси спроса 6–9.</p>
+      <p class="lim">Предел: это спрос родителя; чужая среда с другой петлёй.</p>
+    </div>
+    <div class="src">
+      <div class="h"><span class="n">3</span><span class="ttl">Конкуренты</span></div>
+      <p>Детский опыт стримингов и ОС-приставок — протестированные на миллионах детей решения входа и возврата.</p>
+      <p class="lim">Предел: другая бизнес-модель; «работает у них» ≠ «нужно нам».</p>
+    </div>
+    <div class="src">
+      <div class="h"><span class="n">4</span><span class="ttl">Объективка</span></div>
+      <p>Ofcom, Common Sense Media: как 6–9 реально потребляют ТВ, кто контролирует доступ, навык чтения.</p>
+      <p class="lim">Предел: зарубежные выборки — поправка на РФ.</p>
+    </div>
+    <div class="src">
+      <div class="h"><span class="n">5</span><span class="ttl">Следы команды</span></div>
+      <p>Release notes и справка SberDevices, пресс-релизы. Уже нашли: комнату вынесли на главную, т.к. не находили.</p>
+      <p class="lim">Предел: отфильтрованная коммуникация.</p>
+    </div>
+  </div>
+
+  <div class="blind rv">
+    <div class="card warn">
+      <h4>Слепая зона 1 · отказ родителя (2b)</h4>
+      <p>Его нет нигде, кроме дневника. Несостоявшаяся сессия не оставляет следа — открытые источники бессильны.</p>
+    </div>
+    <div class="card warn">
+      <h4>Слепая зона 2 · голос самого ребёнка</h4>
+      <p>Всегда опосредован родителем или чужой средой. А ведь именно желание ребёнка (Гейт 2) — сердцевина задачи.</p>
+    </div>
+  </div>
+  <p class="note rv" style="margin-top:14px">Вывод: открытые источники задают рамку и проверяют родительскую сторону (Гейт 1 «по воле» — ≈70–80% лимитируют). Детскую сторону добываем своим качественным ресёрчем — наблюдением, а не чтением чужих данных.</p>
 </section>
 
 <div class="divider"></div>
@@ -350,18 +588,13 @@ footer a{font-weight:700}
     </div>
   </div>
 
-  <div class="card rv" style="margin-bottom:18px">
+  <div class="card rv">
     <h4>Как проверить Гейт 1, если отказ не оставляет следа</h4>
     <div class="grid g3" style="margin-top:6px;gap:16px">
       <div><strong style="color:var(--neon)">Слой 1 · прокси в данных</strong><p style="margin-top:6px">Незавершённые подходы (открыл — оборвал за секунды), голосовой запрос без старта сессии, частота запроса PIN, упоры в лимит времени.</p></div>
       <div><strong style="color:var(--neon)">Слой 2 · открытые источники</strong><p style="margin-top:6px">Объективка (≈70–80% родителей лимитируют → Гейт 1 закрыт «по воле» у большинства) + прямые формулировки на форумах.</p></div>
       <div><strong style="color:var(--neon)">Слой 3 · качественный</strong><p style="margin-top:6px">Дневник с полем «хотел → разрешили / отказали → почему» — единственный способ напрямую оценить объём 2b.</p></div>
     </div>
-  </div>
-
-  <div class="card warn rv">
-    <h4>Две системные слепые зоны</h4>
-    <p><strong>Отказ родителя (2b)</strong> — его нет нигде, кроме дневника. <strong>Голос самого ребёнка</strong> — он всегда опосредован родителем или чужой средой. А ведь именно желание ребёнка (Гейт 2) и подавленный спрос (2b) — сердцевина задачи. Значит, открытые источники задают рамку и проверяют родительскую сторону, но детскую сторону приходится добывать наблюдением, а не чтением чужих данных.</p>
   </div>
 </section>
 
@@ -370,14 +603,14 @@ footer a{font-weight:700}
 <!-- COMPETITORS -->
 <section id="comp">
   <span class="kicker">02 · Анализ конкурентов</span>
-  <h2 class="sec-title rv">Три класса игроков</h2>
-  <p class="sec-lead rv">Детская комната — пространство <em>над</em> стримингами, поэтому её настоящие структурные аналоги — детские режимы на уровне ОС, а не отдельные кинотеатры. Разметим всех по тому, какой гейт они закрывают.</p>
+  <h2 class="sec-title rv">Как устроен детский опыт на ТВ сегодня</h2>
+  <p class="sec-lead rv">Детская комната — это пространство <em>над</em> стримингами, поэтому её настоящие структурные аналоги — детские режимы на уровне ОС приставки, а не отдельные кинотеатры. Разметим игроков по тому, какой гейт они закрывают.</p>
 
-  <div class="grid g3 rv" style="margin-bottom:18px">
+  <div class="grid g3 rv" style="margin-bottom:30px">
     <div class="card">
       <span class="tag dark">класс 01</span>
       <h3>UGC-видео</h3>
-      <p>YouTube → VK Видео, Rutube. Бесконечная лента и алгоритмическая выдача. Удерживают <strong>внутри сессии</strong>, но это не механика межсессионного возврата — другая задача.</p>
+      <p>YouTube → VK Видео, Rutube. Бесконечная лента и алгоритмическая выдача удерживают <strong>внутри сессии</strong> — это продление сессии, а не механика межсессионного возврата. Другая задача.</p>
     </div>
     <div class="card">
       <span class="tag dark">класс 02</span>
@@ -387,46 +620,70 @@ footer a{font-weight:700}
     <div class="card glow">
       <span class="tag neon">класс 03 · прямой аналог</span>
       <h3>ОС-приставки</h3>
-      <p>Детское пространство встроено в саму платформу, поверх которой живут стриминги — ровно как Детская комната. В РФ этот класс почти не представлен, и поле для Сбера фактически свободно.</p>
+      <p>Детское пространство встроено в саму платформу, поверх которой уже живут стриминги — ровно как Детская комната в ОС Салют ТВ. В РФ этот класс почти не представлен, поле для Сбера фактически свободно.</p>
     </div>
   </div>
 
-  <div class="card rv">
-    <h4>Контекст, меняющий игру</h4>
-    <p>Уход YouTube (−67% времени за год в РФ) высвободил огромный детский спрос: в онлайн-кинотеатрах зафиксирован резкий приток подписчиков именно детского контента. Главный мировой удерживатель детей у экрана в России деградирует — это <strong>окно возможности именно сейчас</strong>, и петлю возврата, которую все строили вокруг YouTube, в РФ приходится отстраивать заново.</p>
-  </div>
-</section>
-
-<!-- RU TABLE -->
-<section style="padding-top:0">
-  <h3 style="font-size:24px;margin-bottom:8px" class="rv">Российское поле — сравнение</h3>
+  <h3 style="font-size:22px;margin-bottom:8px" class="rv">Российское поле — что есть и чего нет</h3>
   <p class="sec-lead rv" style="margin-bottom:24px">Все освоили «безопасный фильтр на входе». Никто не решает возврат, тонкую кураторику и герметичный вход.</p>
-  <div class="tbl-wrap rv">
-    <table>
-      <thead>
-        <tr><th>Игрок</th><th>Что есть</th><th>Дыра / чего нет</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Кинопоиск</td><td>Детский «режим» (по сути фильтр), PIN, «продолжить» не мешается со взрослым, большая библиотека</td><td><span class="x">Дыра в Гейте 1:</span> ТВ открывает последний профиль — ребёнок утром продолжает смотреть 18+. Профиль навязывается, его нельзя удалить</td></tr>
-        <tr><td>Иви</td><td>Самый зрелый детский раздел РФ. Профиль с возрастом, PIN на Smart TV, выдача под интересы, разделение по детям</td><td><span class="x">Нет</span> триггера возврата и тонкой кураторики по конкретным тайтлам</td></tr>
-        <tr><td>Okko (Сбер)</td><td>PIN, лимит времени, ограничены покупки, прескачивание, богатая библиотека. <span class="v">+168% зрителей</span> детского профиля за 2024</td><td><span class="x">Вопрос каннибализации:</span> детский спрос Сбера растёт в Okko, а не в Детской комнате</td></tr>
-        <tr><td>START / Премьер</td><td>Детский профиль / режим, PIN-код</td><td><span class="x">Базовый минимум</span> — без возврата и без кураторики</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
 
-<!-- MECHANICS -->
-<section style="padding-top:clamp(36px,5vw,60px)">
   <div class="grid g2 rv" style="margin-bottom:18px">
     <div class="card">
-      <h4>Что работает — и не вредит</h4>
-      <ul class="clean">
-        <li><strong>Узнавание через персонажей</strong> — дети опознают шоу по героям, а не по тексту. Решает вход без чтения (Гейт 1·2a) и присвоение пространства (Гейт 2).</li>
-        <li><strong>Эксплуатация пересмотра</strong> — дети любят возвращаться к знакомому; крупные блоки «продолжить» и «снова любимое» работают мягко.</li>
-        <li><strong>Каталог + кураторство</strong> — поднимает доверие родителя, а с ним и метрику (рост детского профиля Okko на 168%).</li>
-      </ul>
+      <span class="tag line">Кинопоиск</span>
+      <h3>Детский «режим» — по сути просто профиль</h3>
+      <p>Фильтруется всё, остаётся только самое безопасное. Выйти из профиля — через PIN. Можно сделать несколько профилей, удалённый контроль просмотра, лимит времени, огромная библиотека.</p>
+      <p style="color:var(--warn)"><strong>Дыра в Гейте 1:</strong> приложение на телевизоре сразу активирует последний профиль — ребёнок утром включает и продолжает смотреть взрослый контент 18+, потому что выход из профиля не происходит автоматически.</p>
     </div>
+    <div class="card">
+      <span class="tag line">Иви</span>
+      <h3>Самый зрелый детский раздел в РФ</h3>
+      <p>Ставка на каталог + PIN. Отдельный детский профиль — личное пространство с возрастным ограничением и только детским контентом; родительский контроль через PIN-код настраивается в том числе на Smart TV.</p>
+      <p>PIN-код · богатая библиотека · покупки ограничены · можно разделять профили по детям · настройка выдачи под интересы ребёнка.</p>
+    </div>
+  </div>
+
+  <div class="grid g2 rv">
+    <div class="card glow">
+      <span class="tag neon">Okko · экосистема Сбера</span>
+      <h3>+168% зрителей детского профиля за 2024</h3>
+      <p>Богатая детская коллекция привела к росту зрителей детского профиля на 168% за год. Это важно вдвойне: Okko — часть экосистемы Сбера, и рост показывает, что детский спрос внутри Сбера уже реализуется, но <strong>в Okko, а не в Детской комнате</strong>. Возникает вопрос: конкуренты за одного ребёнка или две точки одной воронки?</p>
+      <p>Покупки ограничены · PIN · лимит просмотра по времени · прескачивание · богатая библиотека · обучающий, медиа и фан-контент.</p>
+    </div>
+    <div class="card">
+      <span class="tag line">START / Премьер</span>
+      <h3>Базовый минимум</h3>
+      <p>Детский профиль / детский режим, PIN-код. Без механики возврата и без тонкой кураторики.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORLD PATTERNS -->
+<section style="padding-top:clamp(36px,5vw,60px)">
+  <h3 style="font-size:22px;margin-bottom:8px" class="rv">Мировые паттерны — банк готовых решений</h3>
+  <p class="sec-lead rv" style="margin-bottom:24px">Зарубежный рынок нерелевантен как конкурент в РФ, но ценен как источник проверенных на миллионах детей механик.</p>
+
+  <div class="grid g2 rv" style="margin-bottom:18px">
+    <div class="card">
+      <h4>Netflix Kids — узнавание и присвоение (паттерн для Гейта 2)</h4>
+      <p>В октябре 2025 на ТВ выкатили ряд «избранное» с пятью персонажами над сериалами — чтобы вовлечь детей через визуальный язык, который они считывают легче постеров; продакт-менеджер описала это как «комнату, где ребёнок знает, где лежит каждая деталь Lego». Навигация через персонажей и иконки вместо текстовых меню — для тех, кто ещё не читает. <strong>Готовое решение Гейта 1.2 для 6–7 (вход без чтения) и Гейта 2 (присвоение).</strong></p>
+    </div>
+    <div class="card">
+      <h4>Netflix — игры и гибрид ТВ-мобильный</h4>
+      <p>К 2026 Netflix делает ставку на игры для детей и семей как стратегию удержания, включая гибридный TV-mobile гейминг. <strong>Паттерн для триггера возврата:</strong> связка экранов как канал реактивации.</p>
+      <h4 style="margin-top:18px">Глобальный тренд — детский контент как удержание подписки</h4>
+      <p>Сервисы с сильным детским портфелем дают родителям причину дольше оставаться на подписке: у Netflix детский и семейный контент — 15% всего просмотра. Спрос на контент для школьников вырос на 21% за год против падения большинства ТВ-жанров. Подтверждает Модель Б.</p>
+    </div>
+  </div>
+
+  <div class="card warn rv">
+    <h4>YouTube Kids — автоплей как антипаттерн</h4>
+    <p>Автоплей активно выбирает следующее видео по данным вовлечённости, создавая бесфрикционное соскальзывание в долгие сессии; психологи называют его механизмом разрушения саморегуляции, родители сообщают о поведении, похожем на ломку. Показательно: сам YouTube Kids автоплей по умолчанию выключил. <strong>Урок: удержание ценой тревоги родителя выжигает Гейт 1.</strong> При этом автоплей — это про продление сессии, а не про межсессионный возврат: для нашей задачи это не образец, а предостережение.</p>
+  </div>
+</section>
+
+<!-- TV vs MOBILE + TRENDS + WHITESPACE -->
+<section style="padding-top:clamp(36px,5vw,60px)">
+  <div class="grid g2 rv" style="margin-bottom:18px">
     <div class="card">
       <h4>Чем ТВ отличается от мобильного → меняет логику продукта</h4>
       <ul class="clean">
@@ -436,27 +693,31 @@ footer a{font-weight:700}
         <li>Бедный ввод (пульт / голос) → вход без чтения обязателен для 6–7.</li>
       </ul>
     </div>
-  </div>
-
-  <div class="grid g2 rv" style="margin-bottom:18px">
     <div class="card">
       <h4>Тренды прямо сейчас</h4>
       <ul class="clean">
         <li>Перетекание детского спроса из YouTube в российские сервисы.</li>
-        <li>Детский контент = инструмент удержания подписки (спрос на школьный контент +21% за год против падения большинства жанров).</li>
+        <li>Детский контент = инструмент удержания подписки (школьный контент +21% за год).</li>
         <li>Co-viewing жив в семейном формате — совместный просмотр как отдельная ценность.</li>
         <li>VK Видео и Rutube наращивают детские разделы — новый класс конкурентов за привычку «бесконечного ролика».</li>
       </ul>
     </div>
-    <div class="card glow">
-      <h4>Где рынок не дал ответа — наши белые пятна</h4>
-      <ul class="clean">
-        <li><strong>Безопасный триггер возврата на ТВ</strong> — без родителя как будильника. Не решил никто.</li>
-        <li><strong>Тонкая кураторская власть родителю</strong> (чёрный список по тайтлам) — прямой неудовлетворённый запрос с форумов.</li>
-        <li><strong>Герметичный, но не раздражающий вход</strong> — детские режимы у всех протекают.</li>
-        <li><strong>Голосовой детский вход</strong> для нечитающих — у Сбера актив Салют, у конкурентов почти нет.</li>
-      </ul>
-    </div>
+  </div>
+
+  <div class="card glow rv">
+    <h4>Где рынок не дал ответа — наши белые пятна</h4>
+    <ul class="clean">
+      <li><strong>Безопасный триггер возврата на ТВ</strong> — без родителя как будильника. Не решил никто, включая ОС-приставки.</li>
+      <li><strong>Тонкая кураторская власть родителю</strong> (чёрный список по тайтлам) — прямой неудовлетворённый запрос с форумов.</li>
+      <li><strong>Герметичный, но не раздражающий вход</strong> — детские режимы у всех протекают.</li>
+      <li><strong>Голосовой детский вход</strong> для нечитающих — у Сбера актив Салют, у конкурентов почти нет.</li>
+    </ul>
+    <p class="note" style="margin-top:14px">Все ОС-аналоги застряли на той же стадии, что и стриминги: никто не решает триггер возврата и не даёт тонкую кураторскую власть — наши белые пятна подтверждаются на втором классе конкурентов.</p>
+  </div>
+
+  <div class="card rv" style="margin-top:18px">
+    <h4>Контекст, меняющий игру</h4>
+    <p>Уход YouTube (−67% времени за год в РФ) высвободил огромный детский спрос: в онлайн-кинотеатрах зафиксирован резкий приток подписчиков именно детского контента. Главный мировой удерживатель детей у экрана в России деградирует — это <strong>окно возможности именно сейчас</strong>, и петлю возврата, которую все строили вокруг YouTube, в РФ приходится отстраивать заново.</p>
   </div>
 </section>
 
